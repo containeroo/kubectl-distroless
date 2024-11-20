@@ -6,8 +6,9 @@
   "labels": [
     "dependency"
   ],
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "fileMatch": [
         "(^|/)Dockerfile$",
         "(^|/)Dockerfile\\.[^/]*$"
