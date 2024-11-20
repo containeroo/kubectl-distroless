@@ -1,4 +1,4 @@
-FROM alpine:3.18 as downloader
+FROM alpine:3.20 as downloader
 
 # renovate: datasource=github-tags depName=kubernetes/kubectl extractVersion=^kubernetes-(?<version>.*)$
 ARG KUBECTL_VERSION="1.28.0"
