@@ -1,0 +1,38 @@
+name: Publish container image
+
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  multi-arch-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Log in to GitHub Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Prepare release tag
+        id: tag
+        run: echo ::set-output name=version::${GITHUB_REF#refs/tags/v}
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64
+          push: true
+          labels: |
+            org.opencontainers.image.title=kubectl-distroless
+            org.opencontainers.image.description=kubectl-distroless
+            org.opencontainers.image.url=https://github.com/gi8lino/kubectl-distroless
+            org.opencontainers.image.source=https://github.com/gi8lino/kubectl-distroless
+            org.opencontainers.image.version=${{ steps.tag.outputs.version }}
+          tags: |
+            ghcr.io/gi8lino/kubectl-distroless:latest
+            ghcr.io/gi8lino/kubectl-distroless:${{ steps.tag.outputs.version }}
