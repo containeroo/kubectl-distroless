@@ -30,9 +30,9 @@ jobs:
           labels: |
             org.opencontainers.image.title=kubectl-distroless
             org.opencontainers.image.description=kubectl-distroless
-            org.opencontainers.image.url=https://github.com/gi8lino/kubectl-distroless
-            org.opencontainers.image.source=https://github.com/gi8lino/kubectl-distroless
+            org.opencontainers.image.url=https://github.com/containeroo/kubectl-distroless
+            org.opencontainers.image.source=https://github.com/containeroo/kubectl-distroless
             org.opencontainers.image.version=${{ steps.tag.outputs.version }}
           tags: |
-            ghcr.io/gi8lino/kubectl-distroless:latest
-            ghcr.io/gi8lino/kubectl-distroless:${{ steps.tag.outputs.version }}
+            ghcr.io/containeroo/kubectl-distroless:latest
+            ghcr.io/containeroo/kubectl-distroless:${{ steps.tag.outputs.version }}
